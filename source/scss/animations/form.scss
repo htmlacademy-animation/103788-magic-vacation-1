@@ -1,0 +1,16 @@
+.form {
+  justify-content: flex-end;
+
+  &__button {
+    flex: none;
+  }
+
+  &__field {
+    transition: width 0.5s ease 0.2s, padding 0.5s ease 0.2s;
+
+    .screen:not(.active) & {
+      width: 0;
+      padding: 0;
+    }
+  }
+}

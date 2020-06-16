@@ -1,0 +1,7 @@
+.screen {
+  &--hidden {
+    display: initial;
+    visibility: hidden;
+    pointer-events: none;
+  }
+}

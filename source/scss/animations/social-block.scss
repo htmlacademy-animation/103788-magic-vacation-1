@@ -1,0 +1,13 @@
+.social-block {
+  &__toggler {
+    transition: opacity 0.5s ease-in-out;
+
+    &::before {
+      transition: width 0.5s ease-in-out, height 0.5s ease-in-out;
+    }
+  }
+
+  &__list {
+    transition: opacity 0.5s ease-in-out;
+  }
+}

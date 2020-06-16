@@ -1,0 +1,15 @@
+.page-header__menu {
+  a {
+    &::after {
+      transition: width 0.5s ease-in-out;
+
+      a:not(.active) & {
+        width: 0;
+      }
+
+      a.active & {
+        width: 100%;
+      }
+    }
+  }
+}
