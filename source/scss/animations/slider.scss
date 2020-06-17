@@ -1,0 +1,17 @@
+.slider__item {
+  &.swiper-slide {
+    .screen.active & {
+      &-active .slider__item-text,
+      &-next .slider__item-text {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  }
+
+  &-text {
+    transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+    opacity: 0;
+    transform: translateY(20%);
+  }
+}
