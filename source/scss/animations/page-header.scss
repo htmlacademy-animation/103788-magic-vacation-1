@@ -1,15 +1,39 @@
-.page-header__menu {
-  a {
-    &::after {
-      transition: width 0.5s ease-in-out;
+.page-header {
+  &__menu {
+    a {
+      &::after {
+        transition: width 0.5s ease-in-out;
 
-      a:not(.active) & {
-        width: 0;
-      }
+        a:not(.active) & {
+          width: 0;
+        }
 
-      a.active & {
-        width: 100%;
+        a.active & {
+          width: 100%;
+        }
       }
+    }
+  }
+
+  &__logo {
+    transform: translateX(-20%);
+    opacity: 0;
+    transition: transform 1s cubic-bezier(0.5, 0, 0.15, 1), opacity 1s cubic-bezier(0.75, 0, 0, 1);
+
+    .loaded & {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+
+  &__nav {
+    transform: translateX(20%);
+    opacity: 0;
+    transition: transform 1s cubic-bezier(0.5, 0, 0.15, 1), opacity 1s cubic-bezier(0.75, 0, 0, 1);
+
+    .loaded & {
+      transform: translateX(0);
+      opacity: 1;
     }
   }
 }
