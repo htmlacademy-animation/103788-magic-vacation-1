@@ -301,10 +301,6 @@
   }
 }
 
-.screen--prizes {
-  background-color: $c-dark;
-}
-
 .screen--game {
   position: relative;
   background-color: $c-dark;
@@ -349,8 +345,4 @@
     opacity: 1;
     pointer-events: auto;
   }
-}
-
-.screen--rules {
-  background-color: $c-dark;
 }

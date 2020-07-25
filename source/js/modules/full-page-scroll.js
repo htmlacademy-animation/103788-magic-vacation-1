@@ -4,8 +4,10 @@ export default class FullPageScroll {
   constructor() {
     this.THROTTLE_TIMEOUT = 2000;
 
-    this.screenElements = document.querySelectorAll(`.screen:not(.screen--result)`);
+    this.screenElements = document.querySelectorAll(`.screen:not(.screen--result):not(.screen--background)`);
     this.menuElements = document.querySelectorAll(`.page-header__menu .js-menu-link`);
+    this.screenBackground = document.querySelector(`.screen--background`);
+    this.screenBackgroundClassName = `screen--background--active`;
 
     this.activeScreen = 0;
     this.onScrollHandler = this.onScroll.bind(this);
@@ -33,8 +35,33 @@ export default class FullPageScroll {
     this.changePageDisplay();
   }
 
-  changePageDisplay() {
+  isPrizesScreenActive() {
+    return this.activeScreen === 2;
+  }
+
+  showBackground() {
+    this.screenBackground.classList.add(this.screenBackgroundClassName);
+    setTimeout(
+        this.changeVisibilityDisplay.bind(this),
+        500
+    );
+  }
+
+  hideBackground() {
+    this.screenBackground.classList.remove(this.screenBackgroundClassName);
     this.changeVisibilityDisplay();
+  }
+
+  switchBackground() {
+    if (this.isPrizesScreenActive()) {
+      this.showBackground();
+    } else {
+      this.hideBackground();
+    }
+  }
+
+  changePageDisplay() {
+    this.switchBackground();
     this.changeActiveMenuItem();
     this.emitChangeDisplayEvent();
   }
