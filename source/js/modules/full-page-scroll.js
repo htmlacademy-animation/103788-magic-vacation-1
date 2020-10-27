@@ -1,4 +1,5 @@
 import throttle from 'lodash/throttle';
+import animateRules from "./rules";
 
 export default class FullPageScroll {
   constructor() {
@@ -43,6 +44,10 @@ export default class FullPageScroll {
     return this.screenElements[this.activeScreen].id === `story`;
   }
 
+  isRulesScreenActive() {
+    return this.screenElements[this.activeScreen].id === `rules`;
+  }
+
   switchBackground() {
     if (this.isPrizesScreenActive()) {
       this.screenElements[this.activeScreen].classList.add(`screen--animationing`);
@@ -61,6 +66,8 @@ export default class FullPageScroll {
         }
       });
     }
+
+    animateRules(this.isRulesScreenActive());
   }
 
   changePageDisplay() {
