@@ -2,7 +2,7 @@
   &__menu {
     a {
       &::after {
-        transition: width 0.5s ease-in-out;
+        transition: width 0.7s ease-in-out;
 
         a:not(.active) & {
           width: 0;

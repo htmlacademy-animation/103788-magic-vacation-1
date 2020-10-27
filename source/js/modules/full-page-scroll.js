@@ -4,7 +4,7 @@ export default class FullPageScroll {
   constructor() {
     this.THROTTLE_TIMEOUT = 2000;
 
-    this.screenElements = document.querySelectorAll(`.screen:not(.screen--result):not(.screen--background)`);
+    this.screenElements = document.querySelectorAll(`.screen:not(.screen--result)`);
     this.menuElements = document.querySelectorAll(`.page-header__menu .js-menu-link`);
     this.screenBackground = document.querySelector(`.screen--background`);
     this.screenBackgroundClassName = `screen--background--active`;
@@ -36,31 +36,35 @@ export default class FullPageScroll {
   }
 
   isPrizesScreenActive() {
-    return this.activeScreen === 2;
+    return this.screenElements[this.activeScreen].id === `prizes`;
   }
 
-  showBackground() {
-    this.screenBackground.classList.add(this.screenBackgroundClassName);
-    setTimeout(
-        this.changeVisibilityDisplay.bind(this),
-        500
-    );
-  }
-
-  hideBackground() {
-    this.screenBackground.classList.remove(this.screenBackgroundClassName);
-    this.changeVisibilityDisplay();
+  isStoryScreenActive() {
+    return this.screenElements[this.activeScreen].id === `story`;
   }
 
   switchBackground() {
     if (this.isPrizesScreenActive()) {
-      this.showBackground();
-    } else {
-      this.hideBackground();
+      this.screenElements[this.activeScreen].classList.add(`screen--animationing`);
+
+      this.screenElements[this.activeScreen].addEventListener(`animationend`, (evt) => {
+        if (evt.animationName.match(/screen--prizes--bg-slide-up/)) {
+          this.screenElements[this.activeScreen].classList.remove(`screen--animationing`);
+        }
+      });
+    } else if (this.isStoryScreenActive()) {
+      this.screenElements[this.activeScreen].classList.add(`screen--animationing`);
+
+      this.screenElements[this.activeScreen].addEventListener(`animationend`, (evt) => {
+        if (evt.animationName.match(/screen--prizes--bg-slide-up/)) {
+          this.screenElements[this.activeScreen].classList.remove(`screen--animationing`);
+        }
+      });
     }
   }
 
   changePageDisplay() {
+    this.changeVisibilityDisplay();
     this.switchBackground();
     this.changeActiveMenuItem();
     this.emitChangeDisplayEvent();
@@ -70,6 +74,7 @@ export default class FullPageScroll {
     this.screenElements.forEach((screen) => {
       screen.classList.add(`screen--hidden`);
       screen.classList.remove(`active`);
+      screen.classList.remove(`screen--animationing`);
     });
     this.screenElements[this.activeScreen].classList.remove(`screen--hidden`);
     this.screenElements[this.activeScreen].classList.add(`active`);
