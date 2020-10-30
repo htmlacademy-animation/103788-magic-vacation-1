@@ -1,0 +1,21 @@
+@keyframes ruleFadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.rules {
+  &__item {
+    &:not(.rules__item--animationing) {
+      opacity: 0;
+    }
+
+    &--animationing {
+      animation: ruleFadeIn 1s ease-in-out;
+    }
+  }
+}
